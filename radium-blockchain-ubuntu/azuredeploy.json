@@ -235,7 +235,7 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [
-            "https://raw.githubusercontent.com/JJ12880/azure-quickstart-templates/master/radium-blockchain-ubuntu/build_radium.sh"
+            "https://raw.githubusercontent.com/JJ12880/azure-quickstart-templates/JJ12880-14.04LTS/radium-blockchain-ubuntu/build_radium.sh
           ],
           "commandToExecute": "[concat('sh build_radium.sh ', parameters('installMethod'), ' ', parameters('blockchainSource'), ' ', parameters('rpcUser'), ' ', parameters('rpcPass'), ' ', parameters('rpcPort'), ' ', parameters('rpcAllowIp'))]"
           }
