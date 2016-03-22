@@ -6,12 +6,6 @@ ps axjf
 NPROC=$(nproc)
 echo "nproc: $NPROC"
 
-#################################################################
-# Update Ubuntu and install prerequisites for running Radium #
-#################################################################
-
-time apt-get update
-time apt-get install -y ntp wget git miniupnpc build-essential libssl-dev libdb++-dev libboost-all-dev libqrencode-dev libtool autotools-dev autoconf pkg-config
 
 #################################################################
 # Build config file                                             #
@@ -30,6 +24,18 @@ sudo printf 'rpcallowip=%s\n' $5 >> $HOME/.Radium/Radium.conf
 sudo printf 'server=1' >> $HOME/.Radium/Radium.conf
 
 
+
+
+#################################################################
+# Update Ubuntu and install prerequisites for running Radium #
+#################################################################
+
+time apt-get update
+time apt-get install -y ntp wget git miniupnpc build-essential libssl-dev libdb++-dev libboost-all-dev libqrencode-dev libtool autotools-dev autoconf pkg-config
+
+
+
+
 #################################################################
 # Git Clone Radium Source                                       #
 #################################################################
@@ -45,6 +51,21 @@ chmod -R 777 /usr/local/Radium/
 cd /usr/local/Radium/src 
 make -f makefile.unix USE_UPNP=-
 cp /usr/local/Radium/src/Radiumd /usr/bin/Radiumd
+
+#################################################################
+# Install Radium from Binary                                    #
+#################################################################
+
+cd /usr/local/src/
+DOWNLOADFILE=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep browser_download_url | grep linux64 | head -n 1 | cut -d '"' -f 4)
+DOWNLOADNAME=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep name | grep linux64 | head -n 1 | cut -d '"' -f 4)
+DIRNAME=$(echo $DOWNLOADNAME | sed 's/.tgz//')
+sudo wget $DOWNLOADFILE
+sudo tar zxf $DOWNLOADNAME
+sudo cp Radiumd /usr/bin/Radiumd
+
+
+
 
 ################################################################
 # Configure Radium node to auto start at boot       #
