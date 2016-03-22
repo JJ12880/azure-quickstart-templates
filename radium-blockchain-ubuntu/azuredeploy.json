@@ -31,6 +31,17 @@
 				"description": "Method to install Radium. From_Binaries: Official Github binaries and blockchain immage.  From_Source: Build from official Radium repo on Github."
 			}
 		},
+		"blockchainSource": {
+			"type": "string",
+			"defaultValue": "From_Git",
+			"allowedValues": [
+				"From_Network",
+				"From_Git"
+			],
+			"metadata": {
+				"description": "Source to aquire blockchain. From_Git: Download blockchain immage from github. From_Network: Sync blockchain from scratch."
+			}
+		},
 		"vmSize": {
 			"type": "string",
 			"defaultValue": "Standard_A2",
@@ -226,7 +237,7 @@
           "fileUris": [
             "https://raw.githubusercontent.com/JJ12880/azure-quickstart-templates/master/radium-blockchain-ubuntu/build_radium.sh"
           ],
-          "commandToExecute": "[concat('sh build_radium.sh ', parameters('installMethod'), ' ', parameters('rpcUser'), ' ', parameters('rpcPass'), ' ', parameters('rpcPort'), ' ', parameters('rpcAllowIp'))]"
+          "commandToExecute": "[concat('sh build_radium.sh ', parameters('installMethod'), ' ', parameters('blockchainSource'), ' ', parameters('rpcUser'), ' ', parameters('rpcPass'), ' ', parameters('rpcPort'), ' ', parameters('rpcAllowIp'))]"
           }
       }
     }
