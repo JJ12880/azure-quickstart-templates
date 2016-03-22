@@ -25,15 +25,13 @@ sudo printf 'server=1' >> $HOME/.Radium/Radium.conf
 
 
 
-
+time apt-get update
 #################################################################
 # Update Ubuntu and install prerequisites for running Radium #
 #################################################################
 
-time apt-get update
+if [ $1 = 'From_Source' ]; then
 time apt-get install -y ntp wget git miniupnpc build-essential libssl-dev libdb++-dev libboost-all-dev libqrencode-dev libtool autotools-dev autoconf pkg-config
-
-
 
 
 #################################################################
@@ -51,20 +49,34 @@ chmod -R 777 /usr/local/Radium/
 cd /usr/local/Radium/src 
 make -f makefile.unix USE_UPNP=-
 cp /usr/local/Radium/src/Radiumd /usr/bin/Radiumd
-
+else
 #################################################################
 # Install Radium from Binary                                    #
 #################################################################
 
-cd /usr/local/src/
+cd $HOME/.Radium
 DOWNLOADFILE=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep browser_download_url | grep linux64 | head -n 1 | cut -d '"' -f 4)
 DOWNLOADNAME=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep name | grep linux64 | head -n 1 | cut -d '"' -f 4)
 DIRNAME=$(echo $DOWNLOADNAME | sed 's/.tgz//')
 sudo wget $DOWNLOADFILE
 sudo tar zxf $DOWNLOADNAME
+
 sudo cp Radiumd /usr/bin/Radiumd
+fi
 
+if [ $1 = 'From_Source' ]; then
+#################################################################
+# Download Blockchain from Github                               #
+#################################################################
 
+cd $HOME/.Radium
+DOWNLOADFILE=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep browser_download_url | grep linuxblockchain | head -n 1 | cut -d '"' -f 4)
+DOWNLOADNAME=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep name | grep linuxblockchain | head -n 1 | cut -d '"' -f 4)
+DIRNAME=$(echo $DOWNLOADNAME | sed 's/.tgz//')
+sudo wget $DOWNLOADFILE
+sudo tar zxf $DOWNLOADNAME
+sudo rm $DOWNLOADNAME
+fi
 
 
 ################################################################
