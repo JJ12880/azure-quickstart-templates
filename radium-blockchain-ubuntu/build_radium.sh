@@ -17,10 +17,10 @@ then
 sudo mkdir $HOME/.Radium
 fi
 
-sudo printf 'rpcuser=%s\n' $2  >> $HOME/.Radium/Radium.conf
-sudo printf 'rpcpassword=%s\n' $3 >> $HOME/.Radium/Radium.conf
-sudo printf 'rpcport=%s\n' $4 >> $HOME/.Radium/Radium.conf
-sudo printf 'rpcallowip=%s\n' $5 >> $HOME/.Radium/Radium.conf
+sudo printf 'rpcuser=%s\n' $3  >> $HOME/.Radium/Radium.conf
+sudo printf 'rpcpassword=%s\n' $4 >> $HOME/.Radium/Radium.conf
+sudo printf 'rpcport=%s\n' $5 >> $HOME/.Radium/Radium.conf
+sudo printf 'rpcallowip=%s\n' $6 >> $HOME/.Radium/Radium.conf
 sudo printf 'server=1' >> $HOME/.Radium/Radium.conf
 
 
@@ -64,7 +64,7 @@ sudo tar zxf $DOWNLOADNAME
 sudo cp Radiumd /usr/bin/Radiumd
 fi
 
-if [ $1 = 'From_Source' ]; then
+if [ $2 = 'From_Git' ]; then
 #################################################################
 # Download Blockchain from Github                               #
 #################################################################
