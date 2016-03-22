@@ -6,7 +6,8 @@ ps axjf
 NPROC=$(nproc)
 echo "nproc: $NPROC"
 
-
+time apt-get update
+time apt-get install -y curl wget 
 #################################################################
 # Build config file                                             #
 #################################################################
@@ -25,7 +26,7 @@ sudo printf 'server=1' >> $HOME/.Radium/Radium.conf
 
 
 
-time apt-get update
+
 #################################################################
 # Update Ubuntu and install prerequisites for running Radium #
 #################################################################
@@ -60,7 +61,7 @@ DOWNLOADNAME=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | gr
 DIRNAME=$(echo $DOWNLOADNAME | sed 's/.tgz//')
 sudo wget $DOWNLOADFILE
 sudo tar zxf $DOWNLOADNAME
-
+sudo rm $DOWNLOADNAME
 sudo cp Radiumd /usr/bin/Radiumd
 fi
 
@@ -70,8 +71,8 @@ if [ $2 = 'From_Git' ]; then
 #################################################################
 
 cd $HOME/.Radium
-DOWNLOADFILE=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep browser_download_url | grep linuxblockchain | head -n 1 | cut -d '"' -f 4)
-DOWNLOADNAME=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep name | grep linuxblockchain | head -n 1 | cut -d '"' -f 4)
+DOWNLOADFILE=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep browser_download_url | grep chain | head -n 1 | cut -d '"' -f 4)
+DOWNLOADNAME=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep name | grep chain | head -n 1 | cut -d '"' -f 4)
 DIRNAME=$(echo $DOWNLOADNAME | sed 's/.tgz//')
 sudo wget $DOWNLOADFILE
 sudo tar zxf $DOWNLOADNAME
