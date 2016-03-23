@@ -8,7 +8,7 @@ echo "nproc: $NPROC"
 
 time apt-get update
 time apt-get install -y curl wget 
-h = '/home/%s' $7
+h='/home/'$7
 #################################################################
 # Build config file                                             #
 #################################################################
