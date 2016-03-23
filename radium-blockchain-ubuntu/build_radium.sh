@@ -8,21 +8,22 @@ echo "nproc: $NPROC"
 
 time apt-get update
 time apt-get install -y curl wget 
+h = '/home/%s' $7
 #################################################################
 # Build config file                                             #
 #################################################################
 
-file=$HOME/.Radium
+file=$h/.Radium
 if [ ! -e "$file" ]
 then
-sudo mkdir $HOME/.Radium
+sudo mkdir $h/.Radium
 fi
 
-sudo printf 'rpcuser=%s\n' $3  >> $HOME/.Radium/Radium.conf
-sudo printf 'rpcpassword=%s\n' $4 >> $HOME/.Radium/Radium.conf
-sudo printf 'rpcport=%s\n' $5 >> $HOME/.Radium/Radium.conf
-sudo printf 'rpcallowip=%s\n' $6 >> $HOME/.Radium/Radium.conf
-sudo printf 'server=1' >> $HOME/.Radium/Radium.conf
+sudo printf 'rpcuser=%s\n' $3  >> $h/.Radium/Radium.conf
+sudo printf 'rpcpassword=%s\n' $4 >> $h/.Radium/Radium.conf
+sudo printf 'rpcport=%s\n' $5 >> $h/.Radium/Radium.conf
+sudo printf 'rpcallowip=%s\n' $6 >> $h/.Radium/Radium.conf
+sudo printf 'server=1' >> $h/.Radium/Radium.conf
 
 
 
@@ -55,7 +56,7 @@ else
 # Install Radium from Binary                                    #
 #################################################################
 
-cd $HOME/.Radium
+cd $h/.Radium
 DOWNLOADFILE=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep browser_download_url | grep linux64 | head -n 1 | cut -d '"' -f 4)
 DOWNLOADNAME=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep name | grep linux64 | head -n 1 | cut -d '"' -f 4)
 DIRNAME=$(echo $DOWNLOADNAME | sed 's/.tgz//')
@@ -70,7 +71,7 @@ if [ $2 = 'From_Git' ]; then
 # Download Blockchain from Github                               #
 #################################################################
 
-cd $HOME/.Radium
+cd $h/.Radium
 DOWNLOADFILE=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep browser_download_url | grep chain | head -n 1 | cut -d '"' -f 4)
 DOWNLOADNAME=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep name | grep chain | head -n 1 | cut -d '"' -f 4)
 DIRNAME=$(echo $DOWNLOADNAME | sed 's/.tgz//')
@@ -87,4 +88,4 @@ fi
 printf '%s\n%s\n' '#!/bin/sh' '/usr/bin/Radiumd --rpc-endpoint=127.0.0.1:8090 -d /usr/local/Radium/programs/radiumd/'>> /etc/init.d/radium
 chmod +x /etc/init.d/radium
 update-rc.d radium defaults
-/usr/bin/Radiumd --rpc-endpoint=127.0.0.1:8090  & exit 0
+/usr/bin/Radiumd --datadir=$h/.Radiumd --rpc-endpoint=127.0.0.1:8090  & exit 0
