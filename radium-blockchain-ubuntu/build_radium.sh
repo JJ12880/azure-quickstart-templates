@@ -7,7 +7,8 @@ NPROC=$(nproc)
 echo "nproc: $NPROC"
 
 time apt-get update
-time apt-get install -y curl wget 
+time apt-get install -y curl ntp wget git miniupnpc build-essential libssl-dev libdb++-dev libboost-all-dev libqrencode-dev libtool autotools-dev autoconf pkg-config
+
 h='/home/'$7
 #################################################################
 # Build config file                                             #
@@ -32,8 +33,6 @@ sudo printf 'server=1' >> $h/.Radium/Radium.conf
 #################################################################
 
 if [ $1 = 'From_Source' ]; then
-time apt-get install -y ntp wget git miniupnpc build-essential libssl-dev libdb++-dev libboost-all-dev libqrencode-dev libtool autotools-dev autoconf pkg-config
-
 
 #################################################################
 # Git Clone Radium Source                                       #
