@@ -12,7 +12,10 @@
       "value": "GEN-PASSWORD"
     },
     "installMethod": {
-      "value": "From_Source"
+      "value": "From_Binaries"
+    },
+    "blockchainSource": {
+      "value": "From_Git"
     },
     "vmSize": {
       "value": "Standard_A2"
