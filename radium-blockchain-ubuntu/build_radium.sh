@@ -59,11 +59,12 @@ cd /usr/local
 DOWNLOADFILE=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep browser_download_url | grep linux64 | head -n 1 | cut -d '"' -f 4)
 DOWNLOADNAME=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep name | grep linux64 | head -n 1 | cut -d '"' -f 4)
 DIRNAME=$(echo $DOWNLOADNAME | sed 's/.tgz//')
-sudo wget $DOWNLOADFILE
-sudo tar zxf $DOWNLOADNAME
-sudo rm $DOWNLOADNAME
-sudo cp Radiumd /usr/bin/Radiumd
-sudo rm Radiumd
+wget $DOWNLOADFILE
+tar zxf $DOWNLOADNAME
+rm $DOWNLOADNAME
+cp Radiumd /usr/bin/Radiumd
+chmod 777 /usr/bin/Radiumd
+rm Radiumd
 fi
 
 if [ $2 = 'From_Git' ]; then
