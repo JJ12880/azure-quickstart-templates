@@ -8,22 +8,22 @@ echo "nproc: $NPROC"
 
 time apt-get update
 time apt-get install -y curl wget 
-
+h='/home/'$7
 #################################################################
 # Build config file                                             #
 #################################################################
 
-file=$HOME/.Radium
+file=$h/.Radium
 if [ ! -e "$file" ]
 then
-sudo mkdir $HOME/.Radium
+sudo mkdir $h/.Radium
 fi
 
-sudo printf 'rpcuser=%s\n' $3  >> $HOME/.Radium/Radium.conf
-sudo printf 'rpcpassword=%s\n' $4 >> $HOME/.Radium/Radium.conf
-sudo printf 'rpcport=%s\n' $5 >> $HOME/.Radium/Radium.conf
-sudo printf 'rpcallowip=%s\n' $6 >> $HOME/.Radium/Radium.conf
-sudo printf 'server=1' >> $HOME/.Radium/Radium.conf
+sudo printf 'rpcuser=%s\n' $3  >> $h/.Radium/Radium.conf
+sudo printf 'rpcpassword=%s\n' $4 >> $h/.Radium/Radium.conf
+sudo printf 'rpcport=%s\n' $5 >> $h/.Radium/Radium.conf
+sudo printf 'rpcallowip=%s\n' $6 >> $h/.Radium/Radium.conf
+sudo printf 'server=1' >> $h/.Radium/Radium.conf
 
 
 
@@ -77,8 +77,8 @@ DOWNLOADFILE=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | gr
 DOWNLOADNAME=$(curl -s https://api.github.com/repos/JJ12880/Radium/releases | grep name | grep chain | head -n 1 | cut -d '"' -f 4)
 DIRNAME=$(echo $DOWNLOADNAME | sed 's/.tgz//')
 sudo wget $DOWNLOADFILE
-sudo cp $DOWNLOADNAME $HOME/.Radium/
-sudo tar zxf $DOWNLOADNAME -C $HOME/.Radium/
+sudo cp $DOWNLOADNAME $h/.Radium/
+sudo tar zxf $DOWNLOADNAME -C $h/.Radium/
 sudo rm $DOWNLOADNAME
 fi
 
